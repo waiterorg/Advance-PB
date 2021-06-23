@@ -1,0 +1,29 @@
+{% extends 'blog/list.html' %}
+
+{% block header %}
+    <h3 class="alert alert-primary text-center">جست و جو : {{ search }}</h3>
+{% endblock header %}
+
+
+
+{% block previous_page_url %}
+    {% url 'blog:author' author.username page_obj.previous_page_number %}?q={{search}}
+{% endblock %}
+
+
+
+{% block active_page %}
+    {% url 'blog:search' page %}?q={{search}}
+{% endblock %}
+
+
+
+{% block unactive_page %}
+    {% url 'blog:search' page %}?q={{search}}
+{% endblock %}
+
+
+{% block next_page_url %}
+    {% url 'blog:search' page_obj.next_page_number %}?q={{search}}
+{% endblock %}
+

@@ -1,0 +1,27 @@
+{% extends 'blog/list.html' %}
+
+{% block header %}
+{% endblock header %}
+
+
+
+{% block previous_page_url %}
+    {% url 'blog:ArticleListView' page_obj.previous_page_number %}
+{% endblock %}
+
+
+
+{% block active_page %}
+    {% url 'blog:ArticleListView' page %}
+{% endblock %}
+
+
+
+{% block unactive_page %}
+    {% url 'blog:ArticleListView' page %}
+{% endblock %}
+
+
+{% block next_page_url %}
+    {% url 'blog:ArticleListView' page_obj.next_page_number %}
+{% endblock %}

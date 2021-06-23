@@ -1,0 +1,29 @@
+{% extends 'blog/list.html' %}
+
+{% block header %}
+    <h3 class="alert alert-primary text-center">دسته بندی در {{ category.title }}</h3>
+{% endblock header %}
+
+
+
+{% block previous_page_url %}
+    {% url 'blog:CategoryView' category.slug page_obj.previous_page_number %}
+{% endblock %}
+
+
+
+{% block active_page %}
+    {% url 'blog:CategoryView' category.slug page %}
+{% endblock %}
+
+
+
+{% block unactive_page %}
+    {% url 'blog:CategoryView' category.slug page %}
+{% endblock %}
+
+
+{% block next_page_url %}
+    {% url 'blog:CategoryView' category.slug page_obj.next_page_number %}
+{% endblock %}
+

@@ -1,0 +1,48 @@
+{% load static %}
+{% load base_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>وبلاگ شخصی ویتر</title>
+  
+  <!-- Bootstrap core CSS | Custom fonts for this template | Custom styles for this template -->
+  {% include 'shared/styles.html' %}
+
+
+  {% block customheader %}
+
+  {% endblock %}
+
+</head>
+
+<body>
+  
+  <!-- Navigation -->
+  {% category_navbar %}
+
+
+  <!-- Main Content -->
+
+  {% block main %}
+    
+  {% endblock main %}
+
+  <hr>
+  
+  <!-- Footer -->
+  {% include 'shared/footer.html' %}
+  
+  
+  <!-- Bootstrap core JavaScript | Custom scripts for this template -->
+  {% include 'shared/footerstyles.html' %}
+
+</body>
+
+</html>

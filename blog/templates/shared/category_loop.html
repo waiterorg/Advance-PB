@@ -1,0 +1,21 @@
+<ul class="navbar-nav">
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        {% for category in category.children.all %}
+            {% if category.children.all %}
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle"
+                        href="{%url 'blog:CategoryView' category.slug%}">{{category.title}}</a>
+                    <ul class="dropdown-menu">
+                        {% include 'shared/category_loop.html' %}
+                    </ul>
+                </li>
+            </ul>
+            {% else %}
+                <li><a class="dropdown-item" href="{% url 'blog:CategoryView' category.slug %}">{{category.title}}</a></li>
+            {% endif %}
+        {% endfor %}
+            
+        
+    </ul>
+
+</ul>

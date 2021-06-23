@@ -1,0 +1,60 @@
+{% extends 'shared/base.html' %}
+{% load comment_tags %}
+{% load ratings %}
+{% load base_tags %}
+{% load humanize %}
+
+{% block main %}
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('{{article.thumpnail.url}}')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="post-heading">
+                <h1>{{article.title}}</h1>
+                {% if article.is_special %}
+                <span class="badge badge-danger" style="font-size: 18px;">ویژه</span>
+              {% endif %}
+            </h2>
+                <h2 class="subheading"></h2>
+                <span class="meta"> منتشر شده توسط 
+                  <a href="{% url 'blog:author' article.author %}"> {{ article.author.get_full_name }}</a>
+                    در {{ article.publish|naturaltime }}  </span>
+                    <div>{% ratings object %}</div>
+                    <div>بازدید ها :{{ object.hits.count }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+  <!-- Main Content -->
+  <!-- Post Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto text-justify">
+          <aside>
+            {% popular_articles %}
+            {% hot_articles %}
+          </aside>
+          {% if object.is_special %}
+              {% if user.is_authenticated and user.is_special_user or user == object.author or user.is_superuser %}
+                  {{article.description|safe}}
+              {% else %}
+                  {{ article.description|striptags|truncatewords:100 }}
+                  <p class="alert alert-warning"> این مقاله ویژه است و باید <a class="alert-link" href="#">اشتراک ویژه</a> خریداری شود !</p>   
+              {% endif %}
+          {% else %}
+              {{article.description|safe}} 
+          {% endif %}
+          {% render_comments object request %}
+          {% include_bootstrap %}   
+        </div>
+      </div>
+    </div>
+  </article>
+    
+{% endblock main %}

@@ -1,0 +1,81 @@
+{% extends 'shared/base.html' %}
+{% load render_partial %}
+{% load ratings %}
+{% load base_tags %}
+{% load humanize %}
+
+
+{% block main %}
+
+  <!-- Page Header -->
+{% render_partial 'settings:header' %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+       {% block header %} {% endblock header %}
+        <aside>
+          {% popular_articles %}
+          {% hot_articles %}
+        </aside>
+        {% for article in object_list %}
+          <div class="post-preview">
+            <a href="{% url 'blog:articledetail' article.slug %}">
+              <h2 class="post-title">
+                {{article.title}}
+                {% if article.is_special %}
+                  <span class="badge badge-danger" style="font-size: 18px;">ویژه</span>
+                {% endif %}
+              </h2>
+              <div>{% ratings article %}</div>
+              
+              <h3 class="post-subtitle text-justify">
+              {{ article.description|striptags|truncatewords:100 }}
+              </h3>
+            </a>
+            <p class="post-meta">نوشته شده توسط
+              <a href="{% url 'blog:author' article.author %}"> {{ article.author.get_full_name }}</a>
+              {{ article.publish|naturaltime }}</p>        
+            
+            <div>
+              {% for category in article.category.get_active_category %}
+                <a href="{% url 'blog:CategoryView' category.slug %}">#{{ category.title }} </a> 
+              {% endfor %}
+            </div>
+            <div>بازدید ها :{{ article.hits.count }}</div>
+          </div>
+          <hr>
+        {% empty %}
+          <p>متاسفانه محتوایی برای نمایش وجود ندارد.</p>
+        {% endfor %}
+
+      <!-- Pager -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          {% if page_obj.has_previous %}
+          <li class="page-item"><a class="page-link" href="{% block previous_page_url %}{% endblock %}">صفحه قبل</a></li>
+          {% else %}
+          <li class="page-item disabled"><a class="page-link" href="#">صفحه قبل</a></li>
+          {% endif %}
+          
+          {% for page in paginator.page_range %}
+            
+            {% if page == page_obj.number %}
+                <li class="page-item active"><a class="page-link" href="{% block active_page %}{% endblock %}">{{ page }}</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="{% block unactive_page %}{% endblock %}">{{ page }}</a></li>
+            {% endif %}
+            
+          {% endfor %}
+
+          {% if page_obj.has_next %}
+          <li class="page-item"><a class="page-link" href="{% block next_page_url %}{% endblock %}">صفحه بعد</a></li>
+          {% else %}
+          <li class="page-item disabled"><a class="page-link" href="#">صفحه بعد</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+{% endblock main %}
