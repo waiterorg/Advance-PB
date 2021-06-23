@@ -32,6 +32,8 @@ urlpatterns = [
     path('', include('blog.urls')),
     path('', include('blog_setting.urls')),
     path('account/', include('account.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/', include('api.urls')),
 ]
 
 if settings.DEBUG:

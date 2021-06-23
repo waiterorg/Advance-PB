@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'django_gravatar',
     'comment',
     'star_ratings',
+    'rest_framework',
     # apps
     'blog.apps.BlogConfig',
     'blog_setting.apps.BlogSettingConfig',
@@ -174,3 +175,9 @@ STAR_RATINGS_STAR_HEIGHT = 20
 # STAR_RATINGS_ANONYMOUS = True
 # STAR_RATINGS_RERATE = True
 # STAR_RATINGS_STAR_SPRITE = os.path.join(BASE_DIR / 'img.png')
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ]
+}
