@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'comment',
     'star_ratings',
     'rest_framework',
+    'rest_framework.authtoken',
+    'dj_rest_auth',
     # apps
     'blog.apps.BlogConfig',
     'blog_setting.apps.BlogSettingConfig',
