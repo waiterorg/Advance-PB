@@ -8,6 +8,7 @@ dj-rest-auth==2.1.7
 Django==3.1.5
 django-braces==1.14.0
 django-crispy-forms==1.11.2
+django-filter==2.4.0
 django-gravatar2==1.4.4
 django-model-utils==4.1.1
 django-render-partial==0.4

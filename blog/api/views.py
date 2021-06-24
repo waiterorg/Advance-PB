@@ -11,16 +11,21 @@ from .permissions import IsSuperUserOrStaffReadOnly, IsStaffOrReadOnly, IsAuthor
 class ArticleViewSet(ModelViewSet):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializers
+    filterset_fields = ['status', 'author__username']
+    search_fields = ['title', 'author__username',
+                     'description', 'author__first_name', 'author__last_name']
+
 
 def get_permissions(self):
     """
     Instantiates and returns the list of permissions that this view requires.
     """
-    if self.action in ['list','create']:
+    if self.action in ['list', 'create']:
         permission_classes = [IsStaffOrReadOnly]
     else:
         permission_classes = [IsStaffOrReadOnly, IsAuthorOrReadOnly]
     return [permission() for permission in permission_classes]
+
 
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
