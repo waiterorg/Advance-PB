@@ -178,6 +178,6 @@ STAR_RATINGS_STAR_HEIGHT = 20
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        'api.permissions.IsStaffOrReadOnly',
     ]
 }
