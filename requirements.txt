@@ -4,6 +4,7 @@ astroid==2.4.2
 autopep8==1.5.4
 colorama==0.4.3
 distlib==0.3.0
+dj-rest-auth==2.1.7
 Django==3.1.5
 django-braces==1.14.0
 django-crispy-forms==1.11.2
@@ -12,12 +13,15 @@ django-model-utils==4.1.1
 django-render-partial==0.4
 django-star-ratings==0.9.1
 django-widget-tweaks==1.4.8
+djangorestframework==3.12.4
+djangorestframework-simplejwt==4.7.1
 filelock==3.0.12
 isort==4.3.21
 lazy-object-proxy==1.4.3
 mccabe==0.6.1
 Pillow==8.1.0
 pycodestyle==2.6.0
+PyJWT==2.1.0
 pylint==2.5.3
 python-decouple==3.4
 pytz==2020.5

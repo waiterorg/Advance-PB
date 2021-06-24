@@ -181,5 +181,13 @@ STAR_RATINGS_STAR_HEIGHT = 20
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'api.permissions.IsStaffOrReadOnly',
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+    )
 }
+
+REST_USE_JWT = True
+
+JWT_AUTH_COOKIE = 'Advance-PB-access'
+JWT_AUTH_REFRESH_COOKIE = 'Advance-PB-refresh'
