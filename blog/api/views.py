@@ -14,7 +14,8 @@ class ArticleViewSet(ModelViewSet):
     filterset_fields = ['status', 'author__username']
     search_fields = ['title', 'author__username',
                      'description', 'author__first_name', 'author__last_name']
-
+    ordering_fields = ['status', 'is_special']
+    ordering = ['-publish']
 
 def get_permissions(self):
     """
