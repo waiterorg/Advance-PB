@@ -31,4 +31,7 @@ def get_permissions(self):
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializers
+    filterset_fields = ['is_staff']
+    search_fields = ['username']
+    ordering_fields = ['special_user']
     permission_classes = (IsSuperUserOrStaffReadOnly,)
