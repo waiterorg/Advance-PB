@@ -11,7 +11,7 @@ from .permissions import IsSuperUserOrStaffReadOnly, IsStaffOrReadOnly, IsAuthor
 class ArticleViewSet(ModelViewSet):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializers
-    filterset_fields = ['status', 'author__username']
+    filterset_fields = ['status', 'author__username','category__slug']
     search_fields = ['title', 'author__username',
                      'description', 'author__first_name', 'author__last_name']
     ordering_fields = ['status', 'is_special']
