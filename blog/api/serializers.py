@@ -9,7 +9,7 @@ class ArticleSerializers(serializers.ModelSerializer):
             "first_name": obj.author.first_name,
             "last_name": obj.author.last_name,
         }
-    author = serializers.SerializerMethodField('get_author')
+    author_detail = serializers.SerializerMethodField('get_author')
     
     class Meta:
         model = Article
