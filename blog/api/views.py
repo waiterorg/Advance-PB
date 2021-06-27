@@ -16,16 +16,23 @@ class ArticleViewSet(ModelViewSet):
                      'description', 'author__first_name', 'author__last_name']
     ordering_fields = ['status', 'is_special']
     ordering = ['-publish']
+    
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
 
-def get_permissions(self):
-    """
-    Instantiates and returns the list of permissions that this view requires.
-    """
-    if self.action in ['list', 'create']:
-        permission_classes = [IsStaffOrReadOnly]
-    else:
-        permission_classes = [IsStaffOrReadOnly, IsAuthorOrReadOnly]
-    return [permission() for permission in permission_classes]
+    def perform_update(self, serializer):
+        serializer.save(author=self.request.user)
+
+    def get_permissions(self):
+        """
+        Instantiates and returns the list of permissions that this view requires.
+        """
+        if self.action in ['list', 'create']:
+            permission_classes = [IsStaffOrReadOnly]
+        else:
+            permission_classes = [IsStaffOrReadOnly, IsAuthorOrReadOnly]
+        return [permission() for permission in permission_classes]
+
 
 
 class UserViewSet(ModelViewSet):
