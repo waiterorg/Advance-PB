@@ -18,11 +18,23 @@ class ArticleViewSet(ModelViewSet):
     ordering = ['-publish']
     
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+        if self.request.user.is_superuser:
+            serializer.save()
+        else:
+            instance = serializer.save()
+            if not instance.status == 'i':
+                instance.status = 'd'
+            serializer.save(author=self.request.user,status=instance.status)
 
     def perform_update(self, serializer):
-        serializer.save(author=self.request.user)
-
+        if self.request.user.is_superuser:
+            serializer.save()
+        else:
+            instance = serializer.save()
+            if not instance.status == 'i':
+                instance.status = 'd'
+            serializer.save(author=self.request.user,status=instance.status)
+            
     def get_permissions(self):
         """
         Instantiates and returns the list of permissions that this view requires.
