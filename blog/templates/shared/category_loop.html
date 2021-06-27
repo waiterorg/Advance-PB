@@ -1,21 +1,11 @@
-<ul class="navbar-nav">
-    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-        {% for category in category.children.all %}
-            {% if category.children.all %}
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle"
-                        href="{%url 'blog:CategoryView' category.slug%}">{{category.title}}</a>
-                    <ul class="dropdown-menu">
-                        {% include 'shared/category_loop.html' %}
-                    </ul>
-                </li>
-            </ul>
-            {% else %}
-                <li><a class="dropdown-item" href="{% url 'blog:CategoryView' category.slug %}">{{category.title}}</a></li>
-            {% endif %}
-        {% endfor %}
-            
-        
-    </ul>
-
-</ul>
+<ul class="navbar-nav ml-auto">
+    {% for cat in cat.children.get_active_category %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'blog:CategoryView' cat.slug %}">{{cat.title}}</a>
+        {% if cat.children.get_active_category %}
+          {% include 'shared/category_loop.html' %}
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+  

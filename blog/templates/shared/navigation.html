@@ -8,26 +8,27 @@
       Menu
       <i class="fas fa-bars"></i>
     </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
+    <div class="collapse navbar-collapse nav" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
-        {% for category in categories %}
-        {% if category.parent == None %}
-
-        <ul class="navbar-nav">
-          <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="{% url 'blog:CategoryView' category.slug %}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{ category.title }} </a>
-          {% if category.children.all %}
-          {% include 'shared/category_loop.html' %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'blog:ArticleListView' %}">خانه</a>
+        </li>
+        {% for cat in categories %}
+          {% if cat.parent == None %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'blog:CategoryView' cat.slug %}">{{cat.title}}</a>
+              {% if cat.children.get_active_category %}
+                {% include 'shared/category_loop.html' %}
+              {% endif %}
+            </li>
           {% endif %}
-          </li>
-        </ul>
-        {% endif %}
         {% endfor %}
       </ul>
-      <form action="{% url 'blog:search' %}" class="form-inline mt-3">
-        <input type="text" name="q" class="form-control" placeholder="جست و جوی متن">
-        <button class="btn btn-success" style="padding: 8px; border-radius: 5px; margin-right: 5px;">جست و جو</button>
-    </form>
+      <form class="form-inline mt-3" action="{% url 'blog:search' %}">
+        <input type="text" name="q" class="form-control" placeholder="جستجوی متن">
+        <button class="btn btn-success" style="padding: 8px; border-radius: 5px; margin-right: 5px;">جستجو</button>
+      </form>
     </div>
+    
   </div>
 </nav>
